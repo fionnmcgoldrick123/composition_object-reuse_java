@@ -4,7 +4,7 @@ import java.security.Key;
 
 import javax.crypto.Cipher;
 
-public abstract class AbstractCypher {
+public abstract class AbstractCypher implements Cypherable {
 
 	private Cipher cypher;
 
