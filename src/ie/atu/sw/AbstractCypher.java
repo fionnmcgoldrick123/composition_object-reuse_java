@@ -4,28 +4,39 @@ import java.security.Key;
 
 import javax.crypto.Cipher;
 
-public class AbstractCypher {
+public abstract class AbstractCypher {
 
-	protected Cipher cypher;
+	private Cipher cypher;
 
 	public AbstractCypher() {
 		super();
 	}
+	
+	public abstract byte[] encrypt(byte[] plainText) throws Throwable;
+	public abstract byte[] decrypt(byte[] cypherText) throws Throwable;
 
 	public byte[] encrypt(byte[] plainText, Key key) throws Throwable {
-		cypher.init(Cipher.ENCRYPT_MODE, key);
-		return cypher.doFinal(plainText);
+		getCypher().init(Cipher.ENCRYPT_MODE, key);
+		return getCypher().doFinal(plainText);
 	}
 
 	public byte[] decrypt(byte[] cypherText, Key key) throws Throwable {
-		cypher.init(Cipher.DECRYPT_MODE, key);
-		return cypher.doFinal(cypherText);
+		getCypher().init(Cipher.DECRYPT_MODE, key);
+		return getCypher().doFinal(cypherText);
 	}
 
 	@SuppressWarnings("removal")
 	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
+	}
+
+	protected Cipher getCypher() {
+		return cypher;
+	}
+
+	protected void setCypher(Cipher cypher) {
+		this.cypher = cypher;
 	}
 
 }
