@@ -4,7 +4,6 @@ public class CypherFactory {
 	private static CypherFactory cf = new CypherFactory();
 
 	private CypherFactory() {
-
 	}
 
 	public static CypherFactory getInstance() {
@@ -12,14 +11,11 @@ public class CypherFactory {
 	}
 
 	public Cypherable getCypher(CypherType type) throws Throwable {
-		if (type == CypherType.DES) {
-			return new SymmetricCypher("DES", 56, "DES/ECB/PKCS5Padding");
-		} else if (type == CypherType.TripleDES) {
-			return new SymmetricCypher("DESede", 168, "DESede/ECB/PKCS5Padding");
-		} else if (type == CypherType.RSA) {
-			return new RSACypher();
-		} else {
-			return new SymmetricCypher("AES", 128, "AES/ECB/PKCS5Padding");
-		}
+		return switch (type) {
+		case DES -> new SymmetricCypher("DES", 56, "DES/ECB/PKCS5Padding");
+		case TripleDES -> new SymmetricCypher("DESede", 168, "DESede/ECB/PKCS5Padding");
+		case RSA -> new SymmetricCypher("DES", 56, "DES/ECB/PKCS5Padding");
+		default -> new SymmetricCypher("AES", 128, "AES/ECB/PKCS5Padding");
+		};
 	}
 }
