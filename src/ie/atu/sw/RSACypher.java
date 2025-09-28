@@ -9,7 +9,7 @@ import javax.crypto.Cipher;
 public class RSACypher {
 	private Cipher cypher;
 	private KeyPair keyRing;
-	
+
 	public RSACypher() throws Throwable {
 		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
 		keyGen.initialize(2048);
@@ -17,7 +17,15 @@ public class RSACypher {
 		cypher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 	}
 
+	public byte[] encrypt(byte[] plainText) throws Throwable {
+		cypher.init(Cipher.ENCRYPT_MODE, keyRing.getPublic());
+		return cypher.doFinal(plainText);
+	}
 
+	public byte[] decrypt(byte[] cypherText) throws Throwable {
+		cypher.init(Cipher.DECRYPT_MODE, keyRing.getPrivate());
+		return cypher.doFinal(cypherText);
+	}
 
 	@SuppressWarnings("removal")
 	@Override
