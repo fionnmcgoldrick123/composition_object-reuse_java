@@ -2,7 +2,7 @@ package ie.atu.sw;
 
 public class Runner {
 	public static void main(String[] args) throws Throwable {
-		RSACypher cypher = new RSACypher();
+		AbstractCypher cypher = new RSACypher();
 		
 		byte[] s = cypher.encrypt(new String("Attack the castle wall at dawn").getBytes("UTF-8"));
 		
