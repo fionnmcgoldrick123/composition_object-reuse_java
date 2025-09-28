@@ -2,8 +2,6 @@ package ie.atu.sw;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.Cipher;
 
 public class RSACypher {
